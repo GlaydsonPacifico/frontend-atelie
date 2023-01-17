@@ -1,10 +1,22 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import api from '../../services/api';
 
 import { SectionTitle } from '../SectionTitle';
 import ProductItem from './ProductItem';
 import { Container } from './styles';
 
 export function Products() {
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    api.get("/product/listProducts")
+    .then((res) => console.log(res.data))
+    .catch((err) => {
+      console.log("Ops! Ocorreu um erro" + err);
+    })
+  }, [])
+  
   return (
     <Container data-aos="fade-up">
       <SectionTitle title="Alguns de nossos produtos" />
